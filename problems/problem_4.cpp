@@ -3,18 +3,23 @@
 using namespace std;
 
 string problemSolution4(const string &macAddress) {
-    stringstream ss(macAddress.substr(0, 2));
+    stringstream ss(macAddress);
     int 1octet;
-    ss >> hex >> 1octet;
+    char separator;
+    ss >> hex >> 1octet >> separator;
+
+    if (1octet == 0xFF) {
+        string remOctets;
+        getline(ss, remOctets, ':');
+        if (remOctets.find_first_not_of('F') == string::npos) {
+            return "Broadcast";
+        }
+    }
 
     if (1octet % 2 == 0) {
         return "Unicast";
-    } else if (1octet % 2 != 0) {
-        return "Multicast";
-    } else if (macAddress == "FF:FF:FF:FF:FF:FF") {
-        return "Broadcast";
     } else {
-        return "Invalid address";
+        return "Multicast";
     }
 
 }
