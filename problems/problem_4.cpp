@@ -1,25 +1,46 @@
 #include <string>
 #include <sstream>
-using namespace std;
 
-string problemSolution4(const string &macAddress) {
-    stringstream ss(macAddress);
-    int 1octet;
-    char separator;
-    ss >> hex >> 1octet >> separator;
-
-    if (1octet == 0xFF) {
-        string remOctets;
-        getline(ss, remOctets, ':');
-        if (remOctets.find_first_not_of('F') == string::npos) {
-            return "Broadcast";
-        }
+std::string problemSolution4(const std::string &macAddress) {
+    std::string result;
+    if (macAddress[0] == 'F' and macAddress[1] == 'F') {
+        result = "Broadcast";
+    }
+    switch (macAddress[1]) {
+        case '0':
+            result = "Unicast";
+        case '2':
+            result = "Unicast";
+        case '4':
+            result = "Unicast";
+        case '6':
+            result = "Unicast";
+        case '8':
+            result = "Unicast";
+        case 'A':
+            result = "Unicast";
+        case 'C':
+            result = "Unicast";
+        case 'E':
+            result = "Unicast";
+            break;
+        case '1':
+            result = "Multicast";
+        case '3':
+            result = "Multicast";
+        case '5':
+            result = "Multicast";
+        case '7':
+            result = "Multicast";
+        case '9':
+            result = "Multicast";
+        case 'B':
+            result = "Multicast";
+        case 'D':
+            result = "Multicast";
+        case 'F':
+            result = "Multicast";
     }
 
-    if (1octet % 2 == 0) {
-        return "Unicast";
-    } else {
-        return "Multicast";
-    }
-
+    return result;
 }
