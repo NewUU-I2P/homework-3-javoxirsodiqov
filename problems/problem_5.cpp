@@ -12,16 +12,10 @@ float problemSolution5(float x, float y, char operation) {
             result = x * y;
             break;
         case '/':
-            if (y != 0) {
-                result = x / y;
-            } else {
-                cout << "Invalid operation" << endl;
-                result = 0.0;
-            }
+            result = x / y;
             break;
-        default:
-            cout << "Invalid operation" << endl;
-            result = 0.0;
+
+
     }
 
 
